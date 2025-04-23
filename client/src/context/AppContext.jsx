@@ -8,7 +8,7 @@ export const AppContext = createContext();
 
 // AppContextProvider wraps the entire app to share state globally
 export const AppContextProvider = ({ children }) => {
-  const currency = import.meta.VITE_CURRENCY; // Fetch currency from env
+  const currency = import.meta.env.VITE_CURRENCY; // Fetch currency from env
   const navigate = useNavigate();
 
   // State variables
@@ -78,8 +78,8 @@ export const AppContextProvider = ({ children }) => {
     let totalAmount = 0;
     for (const items in cartItems) {
       let itemInfo = products.find((product) => product._id === items);
-      if (cartItems[items] > 0) {
-        totalAmount += itemInfo.offerrprice * cartItems[items];
+      if (itemInfo && cartItems[items] > 0) {
+        totalAmount += itemInfo.offerPrice * cartItems[items];
       }
     }
     return Math.floor(totalAmount * 100) / 100;
