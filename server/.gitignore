@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional build output (if using dist/)
+dist/
+
+# VSCode settings (optional)
+.vscode/
+
+# Debug folder for Node
+.nyc_output/
+
+# Coverage reports
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# PM2 logs (if using PM2)
+pids
+*.pid
+*.seed
+
+# dotenv example (optional)
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
