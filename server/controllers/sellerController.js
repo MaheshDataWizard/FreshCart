@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 // Login Seller : /api/seller/login
 
 export const sellerLogin = async (req, res) => {
@@ -8,12 +10,16 @@ export const sellerLogin = async (req, res) => {
       password === process.env.SELLER_PASSWORD &&
       email === process.env.SELLER_EMAIL
     ) {
-      const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign(
+        { email },
+        process.env.JWT_SECRET || "SECRET#RAMbhau",
+        {
+          expiresIn: "7d",
+        }
+      );
 
       // Set cookie with token
-      res.cookie("token", token, {
+      res.cookie("sellerToken", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
@@ -46,8 +52,6 @@ export const isSellerAuth = async (req, res) => {
     });
   }
 };
-
-
 
 //logout Seller : /api/seller/logout
 export const sellerLogout = async (req, res) => {

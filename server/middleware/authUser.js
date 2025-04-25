@@ -5,7 +5,7 @@ export const authUser = async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
-    return res.json({ success: false, message: "User not Authorized" }); // ❌ You had: `return res, json(...)`
+    return res.json({ success: false, message: "User not Authorized" }); 
   }
 
   try {

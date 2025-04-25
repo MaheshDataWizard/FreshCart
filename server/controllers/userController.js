@@ -1,7 +1,6 @@
 import User from "../models/User.js"; // Updated model name
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import userRouter from "../routes/userRoute.js";
 
 // Register User
 export const register = async (req, res) => {

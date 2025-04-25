@@ -16,6 +16,6 @@ productRouter.post("/add", upload.array("images"), authSeller, addProduct);
 // FIX 2: GET by ID should include an ID param in URL
 productRouter.get("/list", productList);
 productRouter.get("/id/:productId", productById); // example: /id/123
-productRouter.patch("/stock", authSeller, changeStock); // PATCH is more appropriate for updates
+productRouter.post("/stock", authSeller, changeStock); // PATCH is more appropriate for updates
 
 export default productRouter;

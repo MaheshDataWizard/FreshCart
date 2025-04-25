@@ -7,7 +7,10 @@ export const authSeller = async (req, res, next) => {
   }
 
   try {
-    const tokenDecode = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const tokenDecode = jwt.verify(
+      sellerToken,
+      process.env.JWT_SECRET_KEY || "SECRET#RAMbhau"
+    );
 
     if (tokenDecode?.email === process.env.SELLER_EMAIL) {
       next(); // ✅ Move to the next middleware/route handler
@@ -17,4 +20,4 @@ export const authSeller = async (req, res, next) => {
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }
-}
+};
