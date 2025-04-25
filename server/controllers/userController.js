@@ -14,6 +14,7 @@ export const register = async (req, res) => {
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
       return res.json({ success: false, message: "User already exists" });
     }
@@ -46,6 +47,7 @@ export const register = async (req, res) => {
       success: true,
       user: { email: newUser.email, name: newUser.name },
     });
+
   } catch (error) {
     console.error("Registration error:", error.message);
     res.json({ success: false, message: error.message });
@@ -92,6 +94,7 @@ export const login = async (req, res) => {
       success: true,
       user: { email: user.email, name: user.name },
     });
+
   } catch (error) {
     console.error("Login error:", error.message);
 
@@ -116,7 +119,6 @@ export const isAuth = async (req, res) => {
 };
 
 //logout User : /api/user/logout
-
 export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {

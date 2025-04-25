@@ -36,6 +36,19 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  // FEtch user auth status, User Data and Cart Items
+
+  const fetchUser = async () => {
+    try {
+      const { data } = await axios.get("/api/user/is-auth");
+      if (data.success) {
+        setUser(data.user);
+        setCartItems(data.user.cartItems);
+      }
+    } catch (error) {
+      setUser(null);
+    }
+  };
   // 📦 Fetch all products (currently from dummy data)
   const fetchProducts = async () => {
     try {
@@ -111,9 +124,30 @@ export const AppContextProvider = ({ children }) => {
 
   // 🔁 Fetch products when component mounts
   useEffect(() => {
+    fetchUser();
     fetchSeller();
     fetchProducts();
   }, []);
+
+  // Update database cart item
+  useEffect(() => {
+    const updateCart = async () => {
+      try {
+
+        const { data } = await axios.post("/api/cart/update", { cartItems });
+    
+        if (!data.success) {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+
+    if (user) {
+      updateCart();
+    }
+  }, [cartItems, user]);
 
   // 🌍 Values provided to all consuming components
   const value = {
