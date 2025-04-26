@@ -17,6 +17,7 @@ import ProductList from "./pages/seller/ProductList";
 import Orders from "./pages/seller/Orders";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
+import Loading from "./components/Loading";
 
 const App = () => {
   const location = useLocation();
@@ -29,7 +30,9 @@ const App = () => {
       {showUserLogin && <Login />}
       <Toaster />
 
-      <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32"}`}>
+      <div
+        className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32"}`}
+      >
         <Routes>
           {/* User Routes */}
           <Route path="/" element={<Home />} />
@@ -39,6 +42,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/add-address" element={<AddAddress />} />
           <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/loader" element={<Loading />} />
 
           {/* Seller Login Route */}
           <Route path="/seller-login" element={<SellerLogin />} />
@@ -46,7 +50,9 @@ const App = () => {
           {/* Seller Routes */}
           <Route
             path="/seller"
-            element={isSeller ? <SellerLayout /> : <Navigate to="/seller-login" />}
+            element={
+              isSeller ? <SellerLayout /> : <Navigate to="/seller-login" />
+            }
           >
             <Route index element={<AddProduct />} />
             <Route path="product-list" element={<ProductList />} />
